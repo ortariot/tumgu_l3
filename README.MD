@@ -1,0 +1,1 @@
+# Вебинар 2. FastAPI и pydantic

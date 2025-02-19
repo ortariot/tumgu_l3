@@ -1,1 +1,1 @@
-# Вебинар 2. FastAPI и pydantic
+# Вебинар 3. SQLAlchemy и alembic

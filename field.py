@@ -1,6 +1,7 @@
 from datetime import date
 
 from pydantic import BaseModel, field_validator, model_validator, Field, EmailStr
+from typing import Annotated
 
 
 class Person(BaseModel):
@@ -25,6 +26,20 @@ class Postgraduate(Person):
     grant: int = Field(ge=1000, le=10000)
     
 
+
+class CarProperty(BaseModel):
+    id: int = Field(default=1, description="unque id")
+    name: str = Field(default="auto")
+    value: str = Field(default="auto")
+
+
+class Car(BaseModel):
+    id: Annotated[int, Field(default=1, description="unque id")]
+    # id: int = Field(default=1, description="unque id")
+    brand: str = Field(default="auto")
+    propertes: list[CarProperty]
+
+
 if __name__ == "__main__":
     # petr = Student(
     #     id=1,
@@ -45,9 +60,18 @@ if __name__ == "__main__":
     
     # oleg = Student(**oleg_dict)
     
-    alina = Student(score=81, email="alinalin@utmn.ru")
+    # alina = Student(score=81, email="alinalin@utmn.ru")
     
-    seregey = Postgraduate(name="Sergey_Petrov", grant=5000, email="serg@utmn.ru")
+    # seregey = Postgraduate(name="Sergey_Petrov", grant=5000, email="serg@utmn.ru")
     
-    print(alina.model_dump())
-    print(seregey.model_dump())
+    # print(alina.model_dump())
+    # print(seregey.model_dump())
+
+    p1 = CarProperty(id=1, name="max_speed", value="200")
+    p2 = CarProperty(id=2, name="color", value="black")
+    p3 = CarProperty(id=3, name="clereance", value="220")
+
+    myCar = Car(id=1, brand="Toyota", propertes=[p1, p2, p3])
+
+
+    print(myCar.model_dump())
